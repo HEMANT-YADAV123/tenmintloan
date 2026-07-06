@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenmint Loans — Loans that don't confuse you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mint:#0E9F6E;
+    --mint-dark:#0B7A55;
+    --mint-light:#E6F8F0;
+    --ink:#12241E;
+    --ink-soft:#4B5D57;
+    --paper:#FBFAF6;
+    --card:#FFFFFF;
+    --coral:#FF6A4D;
+    --coral-dark:#E8532F;
+    --line:#E7E4DA;
+    --radius:20px;
+    --shadow: 0 10px 30px rgba(18,36,30,0.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+  }
+  h1,h2,h3,h4{font-family:'Poppins',sans-serif; margin:0; color:var(--ink); letter-spacing:-0.01em;}
+  p{margin:0;}
+  a{text-decoration:none; color:inherit;}
+  img,svg{display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:14px 26px; border-radius:100px; font-weight:600; font-size:15px;
+    cursor:pointer; border:none; transition:transform .15s ease, box-shadow .15s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary:hover{background:#000;}
+  .btn-mint{background:var(--mint); color:#fff; box-shadow:0 8px 20px rgba(14,159,110,0.3);}
+  .btn-mint:hover{background:var(--mint-dark);}
+  .btn-ghost{background:transparent; color:var(--ink); border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);}
+  .pill{
+    display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:100px;
+    background:var(--mint-light); color:var(--mint-dark); font-weight:600; font-size:13px;
+  }
+  section{padding:88px 0;}
+  @media (max-width:768px){ section{padding:56px 0;} }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:100; background:rgba(251,250,246,0.88);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1180px; margin:0 auto;}
+  .logo{display:flex; align-items:center; gap:9px; font-family:'Poppins',sans-serif; font-weight:800; font-size:20px;}
+  .logo-mark{width:34px; height:34px; border-radius:9px; background:linear-gradient(135deg,var(--mint),var(--mint-dark)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:16px;}
+  .nav-links{display:flex; gap:30px; align-items:center;}
+  .nav-links a{font-weight:500; font-size:15px; color:var(--ink-soft); transition:color .15s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{display:flex; align-items:center; gap:12px;}
+  .burger{display:none; background:none; border:none; cursor:pointer;}
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .burger{display:block;}
+    .nav-cta .btn-ghost{display:none;}
+  }
+
+  /* HERO */
+  .hero{padding-top:70px; padding-bottom:60px; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero h1{font-size:52px; line-height:1.08; font-weight:700;}
+  @media (max-width:600px){ .hero h1{font-size:36px;} }
+  .hero .highlight{color:var(--mint);}
+  .hero p.sub{margin-top:20px; font-size:18px; color:var(--ink-soft); max-width:480px;}
+  .hero-cta{margin-top:32px; display:flex; gap:14px; flex-wrap:wrap;}
+  .trust-row{margin-top:34px; display:flex; gap:26px; flex-wrap:wrap;}
+  .trust-item{display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600; color:var(--ink-soft);}
+  .trust-item svg{flex-shrink:0;}
+
+  .hero-visual{position:relative;}
+  .hero-card{
+    background:var(--card); border-radius:24px; box-shadow:var(--shadow); padding:28px;
+    border:1px solid var(--line); position:relative; z-index:2;
+  }
+  .hero-card-row{display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px dashed var(--line);}
+  .hero-card-row:last-child{border-bottom:none;}
+  .hero-card-label{font-size:13px; color:var(--ink-soft); font-weight:500;}
+  .hero-card-value{font-size:15px; font-weight:700;}
+  .badge-float{
+    position:absolute; background:var(--coral); color:#fff; padding:10px 16px; border-radius:14px;
+    font-weight:700; font-size:13px; box-shadow:0 10px 24px rgba(232,83,47,0.35); z-index:3;
+  }
+  .badge-1{top:-18px; right:10px; transform:rotate(-4deg);}
+  .badge-2{bottom:20px; left:-24px; background:var(--ink); transform:rotate(3deg);}
+  @media (max-width:900px){ .badge-2{left:0;} }
+  .blob{position:absolute; border-radius:50%; background:var(--mint-light); z-index:1;}
+  .blob-1{width:340px; height:340px; top:-40px; right:-60px;}
+
+  /* SECTION HEADS */
+  .section-head{text-align:center; max-width:640px; margin:0 auto 50px;}
+  .section-head h2{font-size:34px; font-weight:700;}
+  @media (max-width:600px){ .section-head h2{font-size:26px;} }
+  .section-head p{margin-top:14px; font-size:16.5px; color:var(--ink-soft);}
+
+  /* PRODUCTS */
+  .products-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  @media (max-width:960px){ .products-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .products-grid{grid-template-columns:1fr;} }
+  .product-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px;
+    transition:transform .18s ease, box-shadow .18s ease; display:flex; flex-direction:column; gap:14px;
+  }
+  .product-card:hover{transform:translateY(-6px); box-shadow:var(--shadow);}
+  .product-icon{
+    width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+  }
+  .product-card h3{font-size:19px;}
+  .product-card p{color:var(--ink-soft); font-size:14.5px;}
+  .product-rate{font-size:13px; font-weight:700; color:var(--mint-dark); margin-top:auto;}
+  .product-link{font-size:14px; font-weight:600; display:flex; align-items:center; gap:6px; color:var(--ink);}
+
+  /* HOW IT WORKS */
+  .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; counter-reset:step;}
+  @media (max-width:900px){ .steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .steps{grid-template-columns:1fr;} }
+  .step{position:relative; padding:26px 22px; background:var(--card); border-radius:16px; border:1px solid var(--line);}
+  .step-num{
+    width:36px; height:36px; border-radius:50%; background:var(--ink); color:#fff; display:flex;
+    align-items:center; justify-content:center; font-weight:700; font-size:15px; margin-bottom:16px;
+  }
+  .step h4{font-size:16.5px; margin-bottom:8px;}
+  .step p{font-size:14px; color:var(--ink-soft);}
+
+  /* CALCULATOR */
+  .calc-section{background:var(--ink); border-radius:32px; margin:0 24px; padding:60px 48px; color:#fff;}
+  @media (max-width:700px){ .calc-section{padding:40px 24px; margin:0 12px; border-radius:24px;} }
+  .calc-section .section-head h2, .calc-section .section-head p{color:#fff;}
+  .calc-section .section-head p{color:rgba(255,255,255,0.65);}
+  .calc-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;}
+  @media (max-width:860px){ .calc-grid{grid-template-columns:1fr; gap:32px;} }
+  .calc-field{margin-bottom:26px;}
+  .calc-field label{display:flex; justify-content:space-between; font-size:14px; font-weight:600; margin-bottom:10px; color:rgba(255,255,255,0.85);}
+  .calc-field label span{color:var(--mint); font-weight:700;}
+  input[type=range]{
+    -webkit-appearance:none; width:100%; height:6px; border-radius:4px; background:rgba(255,255,255,0.18); outline:none;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:20px; height:20px; border-radius:50%; background:var(--mint);
+    cursor:pointer; border:4px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  }
+  input[type=range]::-moz-range-thumb{
+    width:20px; height:20px; border-radius:50%; background:var(--mint); cursor:pointer; border:4px solid #fff;
+  }
+  .calc-result{background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:32px;}
+  .calc-emi{font-size:44px; font-weight:800; font-family:'Poppins',sans-serif; color:var(--mint);}
+  .calc-emi-label{font-size:13px; color:rgba(255,255,255,0.6); font-weight:600; letter-spacing:0.03em; text-transform:uppercase;}
+  .calc-breakdown{display:flex; gap:24px; margin-top:24px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.12);}
+  .calc-breakdown div{flex:1;}
+  .calc-breakdown .val{font-size:19px; font-weight:700;}
+  .calc-breakdown .lab{font-size:12.5px; color:rgba(255,255,255,0.6); margin-top:4px;}
+
+  /* WHY US */
+  .why-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  @media (max-width:860px){ .why-grid{grid-template-columns:1fr; gap:32px;} }
+  .why-list{display:flex; flex-direction:column; gap:22px;}
+  .why-item{display:flex; gap:16px;}
+  .why-icon{width:40px; height:40px; border-radius:11px; background:var(--mint-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .why-item h4{font-size:16.5px; margin-bottom:5px;}
+  .why-item p{font-size:14.5px; color:var(--ink-soft);}
+  .why-visual{background:var(--card); border:1px solid var(--line); border-radius:24px; padding:28px; box-shadow:var(--shadow);}
+  .compare-row{display:grid; grid-template-columns:1.4fr 0.8fr 0.8fr; gap:10px; padding:14px 0; border-bottom:1px solid var(--line); align-items:center; font-size:14px;}
+  .compare-row:first-child{font-weight:700; color:var(--ink-soft); font-size:12.5px; text-transform:uppercase; letter-spacing:0.03em;}
+  .compare-row:last-child{border-bottom:none;}
+  .compare-tenmint{color:var(--mint-dark); font-weight:700;}
+
+  /* TESTIMONIALS */
+  .testimonial-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:900px){ .testimonial-grid{grid-template-columns:1fr;} }
+  .t-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:28px;}
+  .stars{color:var(--coral); font-size:15px; margin-bottom:14px; letter-spacing:2px;}
+  .t-quote{font-size:15px; color:var(--ink); margin-bottom:20px;}
+  .t-person{display:flex; align-items:center; gap:12px;}
+  .t-avatar{width:42px; height:42px; border-radius:50%; background:var(--mint-light); color:var(--mint-dark); display:flex; align-items:center; justify-content:center; font-weight:700; font-family:'Poppins',sans-serif;}
+  .t-name{font-weight:700; font-size:14px;}
+  .t-role{font-size:12.5px; color:var(--ink-soft);}
+
+  /* FAQ */
+  .faq-list{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px;}
+  .faq-item{background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden;}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; padding:20px 24px; font-size:15.5px;
+    font-weight:600; font-family:'Inter',sans-serif; cursor:pointer; display:flex; justify-content:space-between;
+    align-items:center; color:var(--ink); gap:16px;
+  }
+  .faq-q .icon{transition:transform .2s ease; flex-shrink:0; color:var(--mint-dark);}
+  .faq-item.open .faq-q .icon{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-a-inner{padding:0 24px 20px; font-size:14.5px; color:var(--ink-soft);}
+
+  /* CTA BANNER */
+  .cta-banner{
+    background:linear-gradient(120deg,var(--mint),var(--mint-dark)); border-radius:28px; margin:0 24px;
+    padding:56px 40px; text-align:center; color:#fff;
+  }
+  .cta-banner h2{color:#fff; font-size:30px;}
+  .cta-banner p{color:rgba(255,255,255,0.9); margin-top:12px; font-size:16px;}
+  .cta-banner .hero-cta{justify-content:center; margin-top:26px;}
+  .cta-banner .btn-primary{background:#fff; color:var(--ink);}
+  .cta-banner .btn-ghost{border-color:rgba(255,255,255,0.5); color:#fff;}
+
+  /* FOOTER */
+  footer{padding:56px 0 30px; border-top:1px solid var(--line); margin-top:40px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px;}
+  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr 1fr; gap:32px;} }
+  .footer-col h5{font-size:13px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-soft); margin-bottom:14px;}
+  .footer-col a{display:block; font-size:14.5px; color:var(--ink); margin-bottom:10px;}
+  .footer-col a:hover{color:var(--mint-dark);}
+  .footer-bottom{margin-top:44px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:13px; color:var(--ink-soft);}
+  .disclaimer{font-size:12px; color:var(--ink-soft); margin-top:18px; line-height:1.6; max-width:900px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">T</div>
+      Tenmint <span style="color:var(--mint-dark)">Loans</span>
+    </div>
+    <div class="nav-links">
+      <a href="#products">Loan Types</a>
+      <a href="#calculator">EMI Calculator</a>
+      <a href="#how">How it Works</a>
+      <a href="#faq">FAQs</a>
+    </div>
+    <div class="nav-cta">
+      <a href="https://calendly.com/abhinav-garg-craftai/30min" target="_blank" rel="noopener" class="btn btn-ghost">Talk to an Advisor</a>
+      <a href="#calculator" class="btn btn-mint">Check Eligibility</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill">🌿 No spam calls. No hidden fees.</span>
+      <h1 style="margin-top:20px;">Loans that don't <span class="highlight">confuse you.</span></h1>
+      <p class="sub">Tenmint compares real offers from trusted lenders so you borrow smart — with an advisor who explains everything in plain English, not fine print.</p>
+      <div class="hero-cta">
+        <a href="https://calendly.com/abhinav-garg-craftai/30min" target="_blank" rel="noopener" class="btn btn-mint">Talk to an Advisor →</a>
+        <a href="#products" class="btn btn-ghost">Explore Loan Types</a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3v6c0 5-3.4 8.7-7 11-3.6-2.3-7-6-7-11V5l7-3z" fill="#0E9F6E"/></svg>
+          RBI-registered lending partners
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 17.3l-6.2 3.3 1.2-6.9L2 8.9l7-1L12 1.5l3 6.4 7 1-5 4.8 1.2 6.9z" fill="#FF6A4D"/></svg>
+          4.8/5 from 12,000+ borrowers
+        </div>
+        <div class="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#12241E"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Zero processing fee, always disclosed upfront
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="blob blob-1"></div>
+      <div class="badge-float badge-1">✓ Approved in 24hrs</div>
+      <div class="hero-card">
+        <h4 style="font-size:15px; color:var(--ink-soft); margin-bottom:16px; font-weight:600;">Your Loan Snapshot</h4>
+        <div class="hero-card-row"><span class="hero-card-label">Loan Amount</span><span class="hero-card-value">₹8,00,000</span></div>
+        <div class="hero-card-row"><span class="hero-card-label">Interest Rate</span><span class="hero-card-value">10.5% p.a.</span></div>
+        <div class="hero-card-row"><span class="hero-card-label">Tenure</span><span class="hero-card-value">5 years</span></div>
+        <div class="hero-card-row"><span class="hero-card-label">Monthly EMI</span><span class="hero-card-value" style="color:var(--mint-dark); font-size:19px;">₹17,192</span></div>
+      </div>
+      <div class="badge-float badge-2">🛡️ Advisor-backed, always</div>
+    </div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>One platform, every loan you'll need</h2>
+      <p>We don't sell you a loan. We help you pick the right one — then stick around for the paperwork.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon" style="background:#E6F8F0;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#0E9F6E" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="#0E9F6E" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Personal Loan</h3>
+        <p>For weddings, travel, medical bills, or just breathing room — no collateral, fast disbursal.</p>
+        <div class="product-rate">Starting 10.5% p.a.</div>
+        <a href="#calculator" class="product-link">Check eligibility →</a>
+      </div>
+      <div class="product-card">
+        <div class="product-icon" style="background:#FFE9E4;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 4l9 7" stroke="#FF6A4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v9h14v-9" stroke="#FF6A4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Home Loan</h3>
+        <p>Buy, build, or renovate. Long tenures, low rates, and a clear breakup of every charge.</p>
+        <div class="product-rate">Starting 8.35% p.a.</div>
+        <a href="#calculator" class="product-link">Check eligibility →</a>
+      </div>
+      <div class="product-card">
+        <div class="product-icon" style="background:#E6F8F0;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="12" rx="2" stroke="#0E9F6E" stroke-width="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2" stroke="#0E9F6E" stroke-width="2"/></svg>
+        </div>
+        <h3>Business Loan</h3>
+        <p>Working capital, expansion, or equipment — funding that scales with your business.</p>
+        <div class="product-rate">Starting 11.9% p.a.</div>
+        <a href="#calculator" class="product-link">Check eligibility →</a>
+      </div>
+      <div class="product-card">
+        <div class="product-icon" style="background:#FFE9E4;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 4L2 9l10 5 10-5-10-5z" stroke="#FF6A4D" stroke-width="2" stroke-linejoin="round"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5" stroke="#FF6A4D" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Education Loan</h3>
+        <p>India or abroad — cover tuition, hostel, and living costs with flexible repayment after your course.</p>
+        <div class="product-rate">Starting 9.2% p.a.</div>
+        <a href="#calculator" class="product-link">Check eligibility →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background:#F3F1EA;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How Tenmint works</h2>
+      <p>Four steps, no jargon, no surprise calls from ten different banks.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h4>Tell us what you need</h4><p>Loan type, amount, and purpose — takes under 2 minutes.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>We compare real offers</h4><p>Across our partner lenders, matched to your profile — not a generic rate card.</p></div>
+      <div class="step"><div class="step-num">3</div><h4>Talk to your advisor</h4><p>A real person walks you through the fine print before you sign anything.</p></div>
+      <div class="step"><div class="step-num">4</div><h4>Get funded</h4><p>Digital paperwork, fast disbursal, and we stay reachable after too.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="calculator">
+  <div class="wrap">
+    <div class="calc-section">
+      <div class="section-head">
+        <h2>What will your EMI actually be?</h2>
+        <p>Move the sliders. No email, no signup, no calls.</p>
+      </div>
+      <div class="calc-grid">
+        <div>
+          <div class="calc-field">
+            <label>Loan Amount <span id="amountLabel">₹8,00,000</span></label>
+            <input type="range" id="amount" min="50000" max="10000000" step="10000" value="800000">
+          </div>
+          <div class="calc-field">
+            <label>Interest Rate (p.a.) <span id="rateLabel">10.5%</span></label>
+            <input type="range" id="rate" min="7" max="20" step="0.1" value="10.5">
+          </div>
+          <div class="calc-field">
+            <label>Tenure <span id="tenureLabel">5 years</span></label>
+            <input type="range" id="tenure" min="1" max="30" step="1" value="5">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="calc-emi-label">Estimated Monthly EMI</div>
+          <div class="calc-emi" id="emiValue">₹0</div>
+          <div class="calc-breakdown">
+            <div><div class="val" id="principalValue">₹0</div><div class="lab">Principal</div></div>
+            <div><div class="val" id="interestValue">₹0</div><div class="lab">Total Interest</div></div>
+            <div><div class="val" id="totalValue">₹0</div><div class="lab">Total Payment</div></div>
+          </div>
+          <a href="https://calendly.com/abhinav-garg-craftai/30min" target="_blank" rel="noopener" class="btn btn-mint" style="width:100%; margin-top:26px;">Talk to an advisor about this →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap why-grid">
+    <div>
+      <span class="pill">Why Tenmint</span>
+      <h2 style="margin-top:16px; font-size:32px;">We work for you, not the lender.</h2>
+      <div class="why-list" style="margin-top:30px;">
+        <div class="why-item">
+          <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3v6c0 5-3.4 8.7-7 11-3.6-2.3-7-6-7-11V5l7-3z" fill="#0E9F6E"/></svg></div>
+          <div><h4>Unbiased comparisons</h4><p>We show every eligible offer, ranked by real cost — not commission.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M12 4v16" stroke="#0E9F6E" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><h4>Every fee, spelled out</h4><p>Processing fees, foreclosure charges, insurance add-ons — before you commit, not after.</p></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="#0E9F6E" stroke-width="2"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" stroke="#0E9F6E" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><h4>A human advisor, not a chatbot</h4><p>Same advisor from application to disbursal — reachable by call or WhatsApp.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="compare-row"><span>Lender</span><span>Typical Rate</span><span>Hidden Fees</span></div>
+      <div class="compare-row"><span class="compare-tenmint">Tenmint-matched</span><span class="compare-tenmint">8.35–11.9%</span><span class="compare-tenmint">None</span></div>
+      <div class="compare-row"><span>Walk-in Bank A</span><span>11.2%</span><span>Processing + Insurance</span></div>
+      <div class="compare-row"><span>Walk-in Bank B</span><span>12.8%</span><span>Processing + Legal</span></div>
+      <div class="compare-row"><span>Generic Aggregator</span><span>Varies</span><span>Often undisclosed</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#F3F1EA;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Borrowers who've been there</h2>
+      <p>12,000+ people have used Tenmint to borrow without the anxiety.</p>
+    </div>
+    <div class="testimonial-grid">
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p class="t-quote">"My advisor spent 20 minutes explaining foreclosure charges I didn't even know to ask about. Ended up saving ₹40,000 over my loan term."</p>
+        <div class="t-person"><div class="t-avatar">R</div><div><div class="t-name">Rhea Kapoor</div><div class="t-role">Home Loan, Pune</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p class="t-quote">"First time a loan process didn't feel like I was being sold something. Just clear numbers and honest answers."</p>
+        <div class="t-person"><div class="t-avatar">A</div><div><div class="t-name">Arjun Mehta</div><div class="t-role">Business Loan, Ahmedabad</div></div></div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p class="t-quote">"Compared five offers in one place and got funded in two days. Wish I'd known about Tenmint sooner."</p>
+        <div class="t-person"><div class="t-avatar">S</div><div><div class="t-name">Sana Iyer</div><div class="t-role">Personal Loan, Bengaluru</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Questions, answered honestly</h2>
+      <p>If it's not here, your advisor will answer it directly — no bots.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Does checking my eligibility affect my credit score? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. Our initial eligibility check is a soft inquiry and does not impact your credit score. A hard check only happens once you choose to formally apply with a lender.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How is Tenmint different from a bank or a comparison website? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Banks sell you their own products. Generic comparison sites just rank by commission. Tenmint assigns you a dedicated advisor who explains every offer's real cost and helps you choose — even if that means recommending you don't borrow at all.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What documents do I need to apply? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Typically PAN, Aadhaar, the last 3 months of bank statements, and income proof (salary slips or ITR for self-employed). Your advisor will confirm the exact list based on the loan type and lender.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Are there any fees to use Tenmint? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Tenmint's comparison and advisory service is free for borrowers. We're paid by lending partners only after successful disbursal, and this never changes the rate you're offered.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How fast is disbursal once approved? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Personal loans are typically disbursed within 24–48 hours of approval. Home and business loans, which involve more documentation, usually take 5–10 working days.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I prepay or foreclose my loan early? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Most of our partner lenders allow prepayment with little to no penalty on floating-rate loans. Your advisor will flag any foreclosure charges upfront before you sign.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-banner">
+      <h2>Ready to borrow without the confusion?</h2>
+      <p>Get matched with the right loan in under 2 minutes.</p>
+      <div class="hero-cta">
+        <a href="#calculator" class="btn btn-primary">Check My Eligibility →</a>
+        <a href="https://calendly.com/abhinav-garg-craftai/30min" target="_blank" rel="noopener" class="btn btn-ghost">Talk to an Advisor</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:14px;">
+          <div class="logo-mark">T</div>
+          Tenmint Loans
+        </div>
+        <p style="font-size:14px; color:var(--ink-soft); max-width:280px;">Honest, advisor-backed loan comparisons for personal, home, business, and education loans.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Loans</h5>
+        <a href="#products">Personal Loan</a>
+        <a href="#products">Home Loan</a>
+        <a href="#products">Business Loan</a>
+        <a href="#products">Education Loan</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#how">How it Works</a>
+        <a href="#faq">FAQs</a>
+        <a href="#why">Why Tenmint</a>
+        <a href="#calculator">EMI Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <a href="mailto:hello@tenmintloans.example">hello@tenmintloans.example</a>
+        <a href="tel:+911800000000">1800-000-0000</a>
+        <a href="#">WhatsApp Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Tenmint Loans. All rights reserved.</span>
+      <span>Tenmint is a loan advisory platform. All loans are disbursed by RBI-registered partner lenders.</span>
+    </div>
+    <p class="disclaimer">Disclaimer: This is a demo/sample website created for illustrative purposes. "Tenmint Loans" is a fictional brand used here as a placeholder. Interest rates, fees, and testimonials shown are illustrative examples and not actual offers. Loan approval is subject to lender credit policy and eligibility criteria.</p>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // EMI Calculator
+  const amountEl = document.getElementById('amount');
+  const rateEl = document.getElementById('rate');
+  const tenureEl = document.getElementById('tenure');
+  const amountLabel = document.getElementById('amountLabel');
+  const rateLabel = document.getElementById('rateLabel');
+  const tenureLabel = document.getElementById('tenureLabel');
+  const emiValue = document.getElementById('emiValue');
+  const principalValue = document.getElementById('principalValue');
+  const interestValue = document.getElementById('interestValue');
+  const totalValue = document.getElementById('totalValue');
+
+  function formatINR(num){
+    return '₹' + Math.round(num).toLocaleString('en-IN');
+  }
+
+  function calculate(){
+    const P = parseFloat(amountEl.value);
+    const annualRate = parseFloat(rateEl.value);
+    const years = parseFloat(tenureEl.value);
+    const r = annualRate / 12 / 100;
+    const n = years * 12;
+    const emi = r === 0 ? P / n : (P * r * Math.pow(1+r, n)) / (Math.pow(1+r, n) - 1);
+    const totalPayment = emi * n;
+    const totalInterest = totalPayment - P;
+
+    amountLabel.textContent = formatINR(P);
+    rateLabel.textContent = annualRate.toFixed(1) + '%';
+    tenureLabel.textContent = years + (years == 1 ? ' year' : ' years');
+    emiValue.textContent = formatINR(emi);
+    principalValue.textContent = formatINR(P);
+    interestValue.textContent = formatINR(totalInterest);
+    totalValue.textContent = formatINR(totalPayment);
+  }
+
+  [amountEl, rateEl, tenureEl].forEach(el => el.addEventListener('input', calculate));
+  calculate();
+</script>
+
+</body>
+</html>
